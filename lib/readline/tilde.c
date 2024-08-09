@@ -365,6 +365,15 @@ tilde_expand_word (const char *filename)
       return (glue_prefix_and_suffix (expansion, filename, 1));
     }
 
+  /* Check for custom case of "~~" and "~~/", expand to the value of $SYMLINKS */
+  if (filename[1] == '~' && filename[2] == '\0' || 
+      (filename[2] != '\0' && filename[2] == '/'))
+    {
+      expansion = sh_get_env_value ("SYMLINKS");
+      if (expansion != 0)
+        return (glue_prefix_and_suffix (expansion, filename, 2));
+    }
+
   username = isolate_tilde_prefix (filename, &user_len);
 
   if (tilde_expansion_preexpansion_hook)
