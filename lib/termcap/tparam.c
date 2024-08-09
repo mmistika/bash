@@ -18,6 +18,8 @@
    along with Bash.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include <unistd.h>
+
 /* Emacs config.h may rename various library functions such as malloc.  */
 #ifdef HAVE_CONFIG_H
 #include <config.h>
